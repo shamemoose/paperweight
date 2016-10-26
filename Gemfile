@@ -39,3 +39,5 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 gem 'mime-types', '~> 2.6.2'
+
+gem 'jquery-ui-rails'
