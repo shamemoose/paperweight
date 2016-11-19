@@ -22,10 +22,14 @@
   </div>
 
   <div class="field">
+    <%= f.label :email, 'Email Address:' %>
+    <%= f.text_field :email, size: 50 %>
+  </div>
+
+  <div class="field">
     <%= f.label :password, 'Password:' %>
     <%= f.password_field :password, size: 40 %>
   </div>
-
 
   <div class="field">
     <%= f.label :password_confirmation, 'Confirm:' %>
