@@ -4,17 +4,18 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(name: params[:name])
+    user = User.find_by(email: params[:email])
     if user and user.authenticate(params[:password])
-      session[:user_id] = user.id
-      redirect_to admin_url
+      log_in user
+      redirect_to user
     else
-      redirect_to login_url, alert: "Invalid user/password combination"
+      flash.now[:danger] = 'Invalid email/password combination'
+      render 'new'
     end
   end
 
   def destroy
-    session[:user_id] = nil
-    redirect_to store_url, notice: "Logged out"
+    log_out
+    redirect_to root_url
   end
 end

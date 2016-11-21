@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  before_save { self.email = email.downcase }
+  has_secure_password
+
 	has_many :publications
 	has_many :active_relationships, class_name:  "Relationship",
 																	foreign_key: "follower_id",
@@ -9,10 +12,12 @@ class User < ActiveRecord::Base
 																	 dependent:   :destroy
 	has_many :following, through: :active_relationships, source: :followed
 	has_many :followers, through: :passive_relationships, source: :follower
-  has_secure_password
 
   validates :name, presence: true
-  validates :email, presence: true, uniqueness: true
+  validates :email, presence: true, length: { maximum: 255 },
+            uniqueness: { case_sensitive: false }
+  validates :password, presence: true, length: { minimum: 6 }
+
 
   # Follows a user.
   def follow(other_user)
