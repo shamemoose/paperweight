@@ -41,3 +41,6 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'mime-types', '~> 2.6.2'
 
 gem 'jquery-ui-rails'
+
+gem 'faker'
+gem 'bootstrap-sass'

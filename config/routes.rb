@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :publications
+
   get 'admin' => 'admin#index'
 
   controller :sessions do

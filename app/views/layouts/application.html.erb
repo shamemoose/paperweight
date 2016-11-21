@@ -1,42 +1,17 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Pragprog Books Online Store</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<%= content_tag :body, class: controller.controller_name do %>
-  <div id="banner">
-    <%= image_tag("logo.png") %>
-    <%= @page_title || "Pragmatic Bookshelf" %>
-  </div>
-  <div id="columns">
-    <div id="side">
-      <ul>
-      	<li><a href="/">Home</a></li>
-      	<li><a href="/faq">Questions</a></li>
-      	<li><a href="/news">News</a></li>
-      	<li><a href="/contact">Contact</a></li>
-      </ul>
-      <% if @cart %>
-        <%= hidden_div_if(@cart.line_items.empty?, id: 'cart') do %>
-          <%= render @cart %>
-        <% end %>
-      <% end %>
-      <% if session[:user_id] %>
-        <br />
-        <%= link_to 'Orders',   orders_path   %><br />
-        <%= link_to 'Products', products_path %><br />
-        <%= link_to 'Users',    users_path    %><br />
-        <br />
-        <%= button_to 'Logout', logout_path, :method => :delete   %>
-      <% end %>
-    <span class="time"><%= DateTime.current() %></span>
-    </div>
-    <div id="main">
+  <head>
+    <title>Paperweight</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all',
+                                              'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <%= render 'layouts/header' %>
+    <div class="container">
       <%= yield %>
+      <%= render 'layouts/footer' %>
     </div>
-  </div>
-<% end %>
+  </body>
 </html>

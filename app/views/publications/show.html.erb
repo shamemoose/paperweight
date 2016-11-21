@@ -1,0 +1,15 @@
+ <h1><%= @publication.title %></h1>
+<p>
+  <%= @publication.description %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%= link_to @publication.user.name, user_path(@publication.user) %>
+</p>
+<p>
+  Published <%= @publication.publication_date %>
+</p>
+
+<%= link_to 'Edit', edit_publication_path(@publication) %> |
+<%= link_to 'Back', publications_path %>
