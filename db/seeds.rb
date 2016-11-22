@@ -1,7 +1,9 @@
 # Users
 User.create!(name:     "admin",
              email:    "admin@paperweight.biz",
-             password: "foobar")
+             password: "foobar",
+             password_confirmation: "foobar",
+             admin: true)
 
 99.times do |n|
   name  = Faker::Name.name
@@ -9,7 +11,15 @@ User.create!(name:     "admin",
   password = "password"
   User.create!(name:     name,
                email:    email,
-               password: password)
+               password: password,
+               password_confirmation: password)
+end
+
+users = User.order(:created_at).take(6)
+50.times do
+  title = Faker::Lorem.sentence(4)
+  description = Faker::Lorem.sentence(20)
+  users.each { |user| user.publications.create!(title: title, description: description) }
 end
 
 # Following relationships

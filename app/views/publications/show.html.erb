@@ -1,15 +1,18 @@
- <h1><%= @publication.title %></h1>
-<p>
-  <%= @publication.description %>
-</p>
-
-<p>
-  <strong>Author:</strong>
-  <%= link_to @publication.user.name, user_path(@publication.user) %>
-</p>
-<p>
-  Published <%= @publication.publication_date %>
-</p>
-
-<%= link_to 'Edit', edit_publication_path(@publication) %> |
-<%= link_to 'Back', publications_path %>
+<div class="row">
+  <div class="publication col-md-8">
+  	<div class="pub_header">
+	    <span class="title"><%= @publication.title %></span>
+	    <%= link_to @publication.user.name, user_path(@publication.user) %>
+	</div>
+		<p>
+			  <%= @publication.description %>
+		</p>
+    <span class="timestamp">
+      Published <%= @publication.created_at.strftime("%B #{@publication.created_at.day.ordinalize}, %Y") %>.
+      <% if current_user?(@publication.user) %>
+      <%= link_to "delete", @publication, method: :delete,
+                                       data: { confirm: "Are you sure?" } %>
+      <% end %>
+    </span>
+  </div>
+</div>

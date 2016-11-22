@@ -1,0 +1,12 @@
+<li id="publication-<%= publication.id %>">
+  <span class="title"><%= link_to publication.title, publication_path(publication) %></span>
+  <span class="author"><%= link_to publication.user.name, user_path(publication.user) %></span>
+  <span class="description"><%= publication.description %></span>
+  <span class="timestamp">
+    Published <%= publication.created_at.strftime("%B #{publication.created_at.day.ordinalize}, %Y") %>.
+    <% if current_user?(publication.user) %>
+      <%= link_to "delete", publication, method: :delete,
+                                       data: { confirm: "Are you sure?" } %>
+    <% end %>
+  </span>
+</li>
